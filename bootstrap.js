@@ -38,6 +38,7 @@ function newGame(opt) {
     let game = new Game(canvas, opt);
     game.run();
     game.stateManager.push('parser');
+    window.game = game;
 }
 
 export default {

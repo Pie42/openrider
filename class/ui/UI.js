@@ -1,15 +1,16 @@
 import Track from "../track/Track.js";
 import GameState from "../state/GameState.js";
 
+const ui = document.getElementById('ui');
 export default class UI {
     static swapUI(key) {
-        UI.clearUI();
-        UI.scenes[key].childNodes.forEach(child => ui.appendChild(child));
+        ui.replaceChildren(...UI.scenes[key].childNodes);
+        UI.currentUI = key;
     }
 
     static clearUI() {
-        while (ui.firstChild) {
-            ui.removeChild(ui.firstChild);
+        if (UI?.currentUI) {
+            UI.scenes[UI.currentUI].replaceChildren(...ui.childNodes);
         }
     }
 
@@ -44,10 +45,13 @@ export default class UI {
         uploadButton.innerHTML = 'Upload';
         uploadButton.addEventListener('click', () => UI.handleUpload(state));
 
-        UI.editor.appendChild(importButton);
-        UI.editor.appendChild(importInput);
-        UI.editor.appendChild(exportButton);
-        UI.editor.appendChild(uploadButton);
+        //console.log(UI, state, UI.scenes);
+        window.UI = UI;
+        window.state = state;
+        UI.scenes.editor.appendChild(importButton);
+        UI.scenes.editor.appendChild(importInput);
+        UI.scenes.editor.appendChild(exportButton);
+        UI.scenes.editor.appendChild(uploadButton);
     }
 
     static createRaceUI(state) {
@@ -94,7 +98,7 @@ export default class UI {
      * @param {GameState} state 
      */
     static handleUpload(state) {
-        UI.clearUI();
+        //UI.clearUI();
         state.manager.getState('generator').isTrackUpload = true;
         state.manager.push('generator');
     }
