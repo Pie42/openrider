@@ -26,6 +26,7 @@ export default class UI {
      */
     static createEditorUI(state) {
         let importButton = document.createElement('button');
+        importButton.addEventListener('click', () => importInput.click());
         let importLabel = document.createElement('label');
         importLabel.setAttribute('for', 'import');
         importLabel.innerHTML = 'Import';
