@@ -28,7 +28,9 @@ export default class Track {
         /** @type {number} */
         this.id = opt.id;
         /** @type {string} */
-        this.trackCode = opt.trackCode;
+        this.trackCode = opt.trackCode
+
+        this.trackCode = this.fetchRawTrack();
 
         this.event = new TrackEvent(this);
 
