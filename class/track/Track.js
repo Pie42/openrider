@@ -184,7 +184,7 @@ export default class Track {
 
     restart() {
         this.unreachEverything();
-        this.pause(false);
+        this.pause(true);
 
         this.playerRunner.restart();
         this.ghostRunners.forEach(runner => {

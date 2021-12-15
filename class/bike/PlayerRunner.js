@@ -8,11 +8,11 @@ export default class PlayerRunner extends BikeRunner {
     constructor(track, bikeClass) {
         super(track, bikeClass);
 
-        this.track.event.keyboard.registerControl('Up', new Control(KeyCode.DOM_VK_UP));
-        this.track.event.keyboard.registerControl('Down', new Control(KeyCode.DOM_VK_DOWN));
-        this.track.event.keyboard.registerControl('Left', new Control(KeyCode.DOM_VK_LEFT));
-        this.track.event.keyboard.registerControl('Right', new Control(KeyCode.DOM_VK_RIGHT));
-        this.track.event.keyboard.registerControl('Z', new Control(KeyCode.DOM_VK_Z, Keyboard.NONE, true));
+        this.track.event.keyboard.registerControl('Up', new Control([KeyCode.DOM_VK_UP, KeyCode.DOM_VK_I]));
+        this.track.event.keyboard.registerControl('Down', new Control([KeyCode.DOM_VK_DOWN, KeyCode.DOM_VK_K]));
+        this.track.event.keyboard.registerControl('Left', new Control([KeyCode.DOM_VK_LEFT, KeyCode.DOM_VK_J]));
+        this.track.event.keyboard.registerControl('Right', new Control([KeyCode.DOM_VK_RIGHT, KeyCode.DOM_VK_L]));
+        this.track.event.keyboard.registerControl('Z', new Control([KeyCode.DOM_VK_Z], Keyboard.NONE, true));
     }
 
     onHitTarget() {
@@ -49,6 +49,9 @@ export default class PlayerRunner extends BikeRunner {
             this.track.focalPoint = this.instance.hitbox;
             this.track.toolManager.active = false;
         }
+
+        //hope this works
+        this.onHitCheckpoint();
     }
 
     renderInstance(ctx) {
