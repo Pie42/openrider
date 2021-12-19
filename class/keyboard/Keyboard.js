@@ -44,6 +44,9 @@ export default class Keyboard {
                     this.holding.set(key, true);
                     document.dispatchEvent(new CustomEvent('keyboarddown', { detail: key }));
                 }
+                if (control.repeat) {
+                    document.dispatchEvent(new CustomEvent('keyboarddown', { detail: key }));
+                }
             }
         });
     }

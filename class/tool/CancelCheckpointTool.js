@@ -5,7 +5,7 @@ import Control from "../keyboard/Control.js";
 export default class CancelCheckpointTool extends Tool {
     static get toolName() { return 'Cancel Checkpoint'; }
     static get keyLabel() { return 'Backspace'; }
-    static get key() { return new Control(KeyCode.DOM_VK_BACK_SPACE); }
+    static get key() { return new Control(KeyCode.DOM_VK_BACK_SPACE, null, null, true); }
     static get icon() { return 'rewind'; }
 
     run() {
