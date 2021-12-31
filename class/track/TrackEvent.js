@@ -35,7 +35,7 @@ export default class TrackEvent {
     attachMiscEvt() {
         if (!this.evtAttached) {
             this.evtAttached = true;
-            this.track.canvas.addEventListener('mousedown', e => this.onMouseDown(e), { signal: this.evtController.signal });
+            this.track.canvas.addEventListener('mousedown', e => {document.activeElement.blur(); this.onMouseDown(e)}, { signal: this.evtController.signal });
             this.track.canvas.addEventListener('mouseup', e => this.onMouseUp(e), { signal: this.evtController.signal });
             this.track.canvas.addEventListener('mousemove', e => this.onMouseMove(e), { signal: this.evtController.signal });
             this.track.canvas.addEventListener('mousewheel', e => this.onScroll(e), { signal: this.evtController.signal });
@@ -128,7 +128,7 @@ export default class TrackEvent {
     }
 
     onKeyboardDown(e) {
-        let tool = this.track.toolCollection.getByKeyLabel(e.detail);
+        let tool = this.track.toolCollection.getByToolName(e.detail);
         if (tool) {
             tool.run();
         }

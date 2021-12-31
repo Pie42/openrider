@@ -1,11 +1,12 @@
 import Control from "../keyboard/Control.js";
 import * as KeyCode from "../keyboard/KeyCode.js";
 import Tool from "./Tool.js";
+import keyMaps from "../constant/KeyboardConstants.js";
 
 export default class EraserTool extends Tool {
     static get toolName() { return 'Eraser'; }
     static get keyLabel() { return 'E'; }
-    static get key() { return new Control(KeyCode.DOM_VK_E); }
+    static get key() { return keyMaps['Eraser']; }
     static get icon() { return 'eraser'; }
 
     constructor(track) {

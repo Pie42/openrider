@@ -93,5 +93,18 @@ body,
 .tool.empty {
     border-width: 0 0 1px 0 !important;
     background-color: transparent;
-    pointer-events: none
+    pointer-events: none;
+}
+
+.settings-hover:hover {
+    cursor: pointer;
+}
+
+.settings {
+    width: min-content;
+    display: inline;
+}
+
+.settings > p {
+    display: inline;
 }

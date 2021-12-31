@@ -1,11 +1,12 @@
 import Tool from "./Tool.js";
 import * as KeyCode from "../keyboard/KeyCode.js";
 import Control from "../keyboard/Control.js";
+import keyMaps from "../constant/KeyboardConstants.js";
 
 export default class PauseTool extends Tool {
     static get toolName() { return 'Pause'; }
     static get keyLabel() { return 'Space'; }
-    static get key() { return new Control(KeyCode.DOM_VK_SPACE); }
+    static get key() { return keyMaps['Pause']; }
     static get icon() { return 'pause'; }
 
     constructor(track) {

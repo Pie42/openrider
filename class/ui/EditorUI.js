@@ -1,5 +1,5 @@
-import UIView from './UIView.js';
-import UI from './UI.js';
+import UIView from "./UIView.js";
+import UI from "./UI.js";
 
 export default class EditorUI extends UIView {
     createUI(state) {
@@ -15,9 +15,14 @@ export default class EditorUI extends UIView {
         uploadButton.innerHTML = 'Upload';
         uploadButton.addEventListener('click', () => this.handleUpload(state));
 
+        let settingsButton = document.createElement('button');
+        settingsButton.innerHTML = 'Settings';
+        settingsButton.addEventListener('click', () => UI.swapUI('settings'));
+
         this.ui.appendChild(importButton);
         this.ui.appendChild(exportButton);
         this.ui.appendChild(uploadButton);
+        this.ui.appendChild(settingsButton);
     }
 
     /**

@@ -3,16 +3,17 @@ import * as KeyCode from "../keyboard/KeyCode.js";
 import GhostParser from "../parser/GhostParser.js";
 import BikeRunner from "./BikeRunner.js";
 import BikeRenderer from "./instance/renderer/BikeRenderer.js";
+import keyMap from "../constant/KeyboardConstants.js";
 
 export default class PlayerRunner extends BikeRunner {
     constructor(track, bikeClass) {
         super(track, bikeClass);
 
-        this.track.event.keyboard.registerControl('Up', new Control([KeyCode.DOM_VK_UP, KeyCode.DOM_VK_I]));
-        this.track.event.keyboard.registerControl('Down', new Control([KeyCode.DOM_VK_DOWN, KeyCode.DOM_VK_K]));
-        this.track.event.keyboard.registerControl('Left', new Control([KeyCode.DOM_VK_LEFT, KeyCode.DOM_VK_J]));
-        this.track.event.keyboard.registerControl('Right', new Control([KeyCode.DOM_VK_RIGHT, KeyCode.DOM_VK_L]));
-        this.track.event.keyboard.registerControl('Z', new Control([KeyCode.DOM_VK_Z], Keyboard.NONE, true));
+        this.track.event.keyboard.registerControl('Up', keyMap['Up']);
+        this.track.event.keyboard.registerControl('Down', keyMap['Down']);
+        this.track.event.keyboard.registerControl('Left', keyMap['Left']);
+        this.track.event.keyboard.registerControl('Right', keyMap['Right']);
+        this.track.event.keyboard.registerControl('Z', keyMap['Z']);
     }
 
     onHitTarget() {

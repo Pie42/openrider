@@ -1,7 +1,7 @@
 import UIView from './UIView.js';
 import UI from './UI.js';
 import Track from "../track/Track.js";
-import GhostParser from "../parser/GhostParser.js"
+import GhostParser from "../parser/GhostParser.js";
     
 export default class ExportUI extends UIView {
     createUI(state) {

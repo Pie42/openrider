@@ -19,8 +19,8 @@ export default class Tool extends GameObject {
     }
 
     registerControls() {
-        if (this.constructor.keyLabel != null && this.constructor.key != null) {
-            this.track.event.keyboard.registerControl(this.constructor.keyLabel, this.constructor.key);
+        if (this.constructor.toolName != null && this.constructor.key != null) {
+            this.track.event.keyboard.registerControl(this.constructor.toolName, this.constructor.key);
         }
     }
 
@@ -49,7 +49,7 @@ export default class Tool extends GameObject {
     }
 
     isHolding() {
-        return this.track.event.keyboard.isDown(this.constructor.keyLabel);
+        return this.track.event.keyboard.isDown(this.constructor.toolName);
     }
 
     run() {

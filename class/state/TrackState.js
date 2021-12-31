@@ -25,12 +25,12 @@ export default class TrackState extends GameState {
     update(progress, delta) {
         this.track.toolManager.update(progress, delta);
         if (!this.track.paused) {
+            this.track.playerRunner.update(progress, delta);
             this.track.ghostRunners.forEach((runner) => {
                 if (!runner.done) {
                     runner.update(progress, delta);
                 }
             });
-            this.track.playerRunner.update(progress, delta);
         }
         if (this.track.focalPoint) {
             this.track.camera.selfAdd(this.track.focalPoint.displayPos.sub(this.track.camera).scale(delta / 200));

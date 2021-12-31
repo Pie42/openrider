@@ -1,3 +1,5 @@
+import keyMaps from "../constant/KeyboardConstants.js";
+
 export default class Keyboard {
     constructor() {
         this.controls = new Map();
@@ -23,45 +25,52 @@ export default class Keyboard {
     }
 
     test(control, e) {
-        let matches = control.codes.includes(e.which) || control.codes.includes(e.code);
-        if (matches && (control.modifiers & Keyboard.CTRL)) {
-            matches = e.ctrlKey;
+        let matches = control.codes.map(i=>i%256).indexOf(e.which);
+        if (matches >= 0) {
+            let match = control.codes[matches] >> 8;
+            // testing for each modifier
+            return (!e.ctrlKey ^ (match & Keyboard.CTRL))
+                && (!e.altKey ^ (match & Keyboard.ALT))
+                && (!e.shiftKey ^ (match & Keyboard.SHIFT));
         }
-        if (matches && (control.modifiers & Keyboard.ALT)) {
-            matches = e.altKey;
+        else {
+            return 0;
         }
-        if (matches && (control.modifiers & Keyboard.SHIFT)) {
-            matches = e.shiftKey;
-        }
-        return matches;
     }
 
     onKeyDown(e) {
-        this.controls.forEach((control, key) => {
-            if (this.test(control, e)) {
-                e.preventDefault();
-                if (!this.holding.get(key)) {
-                    this.holding.set(key, true);
-                    document.dispatchEvent(new CustomEvent('keyboarddown', { detail: key }));
+        if (document.activeElement == document.body) {
+            this.controls.forEach((control, key) => {
+                if (this.test(control, e)) {
+                    e.preventDefault();
+                    if (!this.holding.get(key)) {
+                        this.holding.set(key, true);
+                        document.dispatchEvent(new CustomEvent('keyboarddown', { detail: key }));
+                    }
+                    if (control.repeat) {
+                        document.dispatchEvent(new CustomEvent('keyboarddown', { detail: key }));
+                    }
                 }
-                if (control.repeat) {
-                    document.dispatchEvent(new CustomEvent('keyboarddown', { detail: key }));
-                }
-            }
-        });
+            });
+        }
+        else if (document.activeElement.localName == 'input' && e.key == 'Enter') {
+            document.getElementById(document.activeElement.dataset.associatedButton).click();
+        }
     }
 
     onKeyUp(e) {
-        this.controls.forEach((control, key) => {
-            if (this.test(control, e)) {
-                e.preventDefault();
-                if (this.holding.get(key)) {
-                    this.holding.set(key, false);
-                    this.firedOnce.set(key, false);
-                    document.dispatchEvent(new CustomEvent('keyboardup', { detail: key }));
+        if (document.activeElement == document.body) {
+            this.controls.forEach((control, key) => {
+                if (this.test(control, e)) {
+                    e.preventDefault();
+                    if (this.holding.get(key)) {
+                        this.holding.set(key, false);
+                        this.firedOnce.set(key, false);
+                        document.dispatchEvent(new CustomEvent('keyboardup', { detail: key }));
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 }
 

@@ -1,10 +1,11 @@
 import Track from "../track/Track.js";
 import GameState from "../state/GameState.js";
-import EditorUI from './EditorUI.js';
-import ExportUI from './ExportUI.js';
-import ImportUI from './ImportUI.js';
-import RaceUI from './RaceUI.js';
-import UploadUI from './UploadUI.js';
+import EditorUI from "./EditorUI.js";
+import ExportUI from "./ExportUI.js";
+import ImportUI from "./ImportUI.js";
+import RaceUI from "./RaceUI.js";
+import SettingsUI from "./SettingsUI.js"
+import UploadUI from "./UploadUI.js";
 
 const ui = document.getElementById('ui');
 export default class UI {
@@ -27,6 +28,7 @@ export default class UI {
             export: new ExportUI(state),
             import: new ImportUI(state),
             race: new RaceUI(state),
+            settings: new SettingsUI(state),
             upload: new UploadUI(state)
         };
     }

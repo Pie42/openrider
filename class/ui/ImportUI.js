@@ -28,6 +28,7 @@ export default class ImportUI extends UIView {
         let importButton = document.createElement('button');
         importButton.style.display = 'block';
         importButton.innerHTML = 'Import';
+        importButton.id = "importButton";
         importButton.addEventListener('click', () => {
             if (importTextArea.value) {
                 this.handleTrackImport(state, importTextArea, 'textarea');
@@ -36,6 +37,8 @@ export default class ImportUI extends UIView {
                 this.handleTrackImport(state, importIdInput, 'number');
             }
         });
+        importTextArea.dataset['associatedButton'] = 'importButton';
+        importIdInput.dataset['associatedButton'] = 'importButton';
 
         // this feels a bit hacky to me
         let spacingbr = document.createElement('br');
@@ -59,7 +62,9 @@ export default class ImportUI extends UIView {
         let ghostImportButton = document.createElement('button');
         ghostImportButton.style.display = 'block';
         ghostImportButton.innerHTML = 'Import ghost';
+        ghostImportButton.id = 'ghostImportButton';
         ghostImportButton.addEventListener('click', () => ghostImportTextArea.value && this.handleGhostImport(state, ghostImportTextArea, 'textarea'));
+        ghostImportTextArea.dataset['associatedButton'] = 'ghostImportButton';
 
         let backButton = document.createElement('button');
         backButton.style.display = 'block';
@@ -154,5 +159,6 @@ export default class ImportUI extends UIView {
         state.track.ghostRunners.push(ghost);
         ghost.createBike();
         importInput.value && (importInput.value = '');
+        UI.swapUI('editor');
     }
 }

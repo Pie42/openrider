@@ -32,7 +32,8 @@ export default class GhostParser {
         let ghostKeys = new Array();
 
         bikeRunner.instance.keyLog.forEach((keyArray) => {
-            ghostKeys.push(keyArray.join(' '));
+            // hacky fix for broken ghosts?
+            ghostKeys.push(keyArray.filter((i, j) => !(keyArray?.[j-1] == i || keyArray?.[j+1] == i)).join(' '));
         });
 
         ghostKeys.push(bikeRunner.track.time, bikeRunner.bikeClass.name);

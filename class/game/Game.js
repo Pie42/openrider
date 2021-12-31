@@ -66,4 +66,8 @@ export default class Game {
             this.frames = 0;
         }
     }
+
+    setFPS(fps) {
+        this.frameDuration = 1000 / fps;
+    }
 }
