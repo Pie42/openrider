@@ -4,7 +4,7 @@ import Line from "./Line.js";
 
 export default class SolidLine extends Line {
     onDelete() {
-        this.grid.totalSolidLines.filter(obj => obj !== this);
+        this.grid.totalSolidLines = this.grid.totalSolidLines.filter(obj => obj !== this);
     }
 
     onAdd() {

@@ -43,11 +43,10 @@ export default class Keyboard {
             this.controls.forEach((control, key) => {
                 if (this.test(control, e)) {
                     e.preventDefault();
-                    if (!this.holding.get(key)) {
-                        this.holding.set(key, true);
-                        document.dispatchEvent(new CustomEvent('keyboarddown', { detail: key }));
-                    }
                     if (control.repeat) {
+                        document.dispatchEvent(new CustomEvent('keyboarddown', { detail: key }));
+                    } else if (!this.holding.get(key)) {
+                        this.holding.set(key, true);
                         document.dispatchEvent(new CustomEvent('keyboarddown', { detail: key }));
                     }
                 }

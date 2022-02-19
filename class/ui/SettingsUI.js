@@ -77,7 +77,7 @@ export default class SettingsUI extends UIView {
             let p6 = document.createElement('p');
             p6.innerHTML = keyMaps[i]?.['repeat'] ? 'true' : 'false';
             p6.title = 'Click to change!'
-            p6.onclick = () => this.changeFireOnce(state, p4, i);
+            p6.onclick = () => this.changeHold(state, p6, i);
             holddiv.appendChild(p6);
             keydiv.appendChild(holddiv);
 
@@ -89,12 +89,24 @@ export default class SettingsUI extends UIView {
             keybindsDiv.appendChild(spacingbr);
         }
 
+        let useGhost = document.createElement('p');
+        useGhost.innerHTML = 'Use ghost: true';
+        useGhost.title = 'Use the inputs from the imported ghost for the player';
+        useGhost.onclick = () => {
+            let i = state.track.playerRunner.useGhost;
+            state.track.playerRunner.useGhost = !i;
+            useGhost.innerHTML = 'Use ghost: ' + (i ? 'false' : 'true');
+        };
+
         let backButton = document.createElement('button');
         backButton.style.display = 'block';
         backButton.innerHTML = 'Back';
         backButton.addEventListener('click', () => UI.swapUI('editor'));
 
         this.ui.appendChild(keybindsDiv);
+        this.ui.appendChild(document.createElement('br'));
+        this.ui.appendChild(useGhost);
+        this.ui.appendChild(document.createElement('br'));
         this.ui.appendChild(backButton);
     }
 
