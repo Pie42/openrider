@@ -37,33 +37,35 @@ export default class Game {
     run() {
         requestAnimationFrame(() => this.run());
 
-        let now = performance.now();
-        let delta = now - this.lastTime;
+        if (!window?.hackyFixToGetThisToStopBreaking) {
+            let now = performance.now();
+            let delta = now - this.lastTime;
 
-        if (delta > 1000) {
-            delta = this.frameDuration;
-        }
+            if (delta > 1000) {
+                delta = this.frameDuration;
+            }
 
-        this.progress += delta / this.frameDuration;
-        this.lastTime = now;
+            this.progress += delta / this.frameDuration;
+            this.lastTime = now;
 
-        while (this.progress >= 1) {
-            this.stateManager.fixedUpdate();
-            this.updates++;
-            this.progress--;
-        }
+            while (this.progress >= 1) {
+                this.stateManager.fixedUpdate();
+                this.updates++;
+                this.progress--;
+            }
 
-        this.stateManager.update(this.progress, delta);
-        this.stateManager.render(this.ctx);
-        this.frames++;
+            this.stateManager.update(this.progress, delta);
+            this.stateManager.render(this.ctx);
+            this.frames++;
 
-        if (performance.now() - this.timer > 1000) {
-            this.timer = performance.now();
+            if (performance.now() - this.timer > 1000) {
+                this.timer = performance.now();
 
-            document.title = `OpenRider - ${this.updates} ups, ${this.frames} fps`;
+                document.title = `OpenRider - ${this.updates} ups, ${this.frames} fps`;
 
-            this.updates = 0;
-            this.frames = 0;
+                this.updates = 0;
+                this.frames = 0;
+            }
         }
     }
 
