@@ -136,7 +136,7 @@ export default class TrackEvent {
 
     onVisibilityChange() {
         if (document.hidden) {
-            this.track.pause(true);
+            this.track.pause(true, false);
         }
     }
 }
