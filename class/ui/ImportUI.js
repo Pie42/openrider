@@ -66,12 +66,6 @@ export default class ImportUI extends UIView {
         ghostImportButton.addEventListener('click', () => ghostImportTextArea.value && this.handleGhostImport(state, ghostImportTextArea, 'textarea'));
         ghostImportTextArea.dataset['associatedButton'] = 'ghostImportButton';
 
-        let ghostPlayerImportButton = document.createElement('button');
-        ghostPlayerImportButton.style.display = 'block';
-        ghostPlayerImportButton.innerHTML = 'Import ghost to player';
-        ghostPlayerImportButton.id = 'ghostPlayerImportButton';
-        ghostPlayerImportButton.addEventListener('click', () => ghostImportTextArea.value && this.handlePlayerGhostImport(state, ghostImportTextArea));
-
         let backButton = document.createElement('button');
         backButton.style.display = 'block';
         backButton.innerHTML = 'Back';
@@ -87,7 +81,6 @@ export default class ImportUI extends UIView {
         this.ui.appendChild(ghostImportFileButton);
         this.ui.appendChild(ghostImportTextArea);
         this.ui.appendChild(ghostImportButton);
-        this.ui.appendChild(ghostPlayerImportButton);
         this.ui.appendChild(backButton);
     }
 
@@ -159,10 +152,6 @@ export default class ImportUI extends UIView {
         else if (type == 'textarea') {
             this.importGhost(state, importInput, importInput.value);
         }
-    }
-
-    handlePlayerGhostImport(state, importInput) {
-        state.track.playerRunner.importGhost(importInput.value);
     }
 
     importGhost(state, importInput, code) {

@@ -1,7 +1,6 @@
 import GameObject from "../game/GameObject.js";
 import Track from "../track/Track.js";
 import GameState from "./GameState.js";
-import GhostExporter from "../parser/GhostExporter.js";
 
 export default class StateManager extends GameObject {
     constructor(game, canvas, opt) {
@@ -9,7 +8,6 @@ export default class StateManager extends GameObject {
 
         this.game = game;
         this.track = new Track(canvas, opt);
-        this.ghostExporter = new GhostExporter(this);
 
         /** @type {Map<String, GameState>} */
         this.states = new Map();
@@ -46,15 +44,15 @@ export default class StateManager extends GameObject {
         return this.states.get(name);
     }
 
-    fixedUpdate(a) {
+    fixedUpdate() {
         if (this.stateStack.length) {
-            this.getCurrent().fixedUpdate(a);
+            this.getCurrent().fixedUpdate();
         }
     }
 
-    update(progress, delta, a) {
+    update(progress, delta) {
         if (this.stateStack.length) {
-            this.getCurrent().update(progress, delta, a);
+            this.getCurrent().update(progress, delta);
         }
     }
 

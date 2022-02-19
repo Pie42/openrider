@@ -177,9 +177,9 @@ export default class Track {
         });
     }
 
-    pause(paused, updateDOM = true) {
+    pause(paused) {
         this.paused = paused;
-        updateDOM && this.toolCollection.getByToolName(PauseTool.toolName).updateDOM();
+        this.toolCollection.getByToolName(PauseTool.toolName).updateDOM();
     }
 
     restart() {
