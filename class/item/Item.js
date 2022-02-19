@@ -93,7 +93,7 @@ export default class Item extends GameObject {
     onTouch(part) { }
 
     onDelete() {
-        this.grid.totalObjects = this.grid.totalObjects.filter(obj => obj !== this);
+        this.grid.totalObjects.filter(obj => obj !== this);
     }
 
     onAdd() {
